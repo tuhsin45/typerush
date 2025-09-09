@@ -1,34 +1,18 @@
 {
-<<<<<<< HEAD
   "name": "typerush",
   "version": "1.0.0",
   "description": "A full-stack MERN typing speed test application",
-  "scripts": {
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "cd backend && npm run dev",
-    "client": "cd frontend && npm run dev",
-    "install-server": "cd backend && npm install",
-    "install-client": "cd frontend && npm install",
-    "install-all": "npm run install-server && npm run install-client",
-    "build": "cd frontend && npm run build",
-    "start": "cd backend && npm start"
-  },
-  "keywords": ["typing", "speed", "test", "mern", "react", "nodejs"],
-  "author": "TypeRush Team",
-  "license": "MIT",
-  "devDependencies": {
-    "concurrently": "^8.2.0"
-=======
-  "name": "typerush-backend",
-  "version": "1.0.0",
-  "description": "Backend API for TypeRush typing speed test application",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "concurrently \"nodemon server.js\" \"npm run client\"",
+    "server": "nodemon server.js",
+    "client": "cd frontend && npm run dev",
+    "install-client": "cd frontend && npm install",
+    "build": "cd frontend && npm run build"
   },
-  "keywords": ["typing", "speed", "test", "api", "nodejs", "express"],
-  "author": "TypeRush Team",
+  "keywords": ["typing", "speed", "test", "mern", "react", "nodejs"],
+  "author": "TypeRush Team", 
   "license": "MIT",
   "dependencies": {
     "express": "^4.18.2",
@@ -39,7 +23,7 @@
     "dotenv": "^16.3.1"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
->>>>>>> 1cace3bed55a848cd44204ae1d9e05ad7d3b7280
+    "nodemon": "^3.0.1",
+    "concurrently": "^8.2.0"
   }
 }
