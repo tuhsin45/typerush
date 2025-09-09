@@ -39,6 +39,7 @@
   /* Text Colors */
   --text-primary: var(--gray-900);
   --text-secondary: var(--gray-600);
+  --text-tertiary: var(--gray-400);
   --text-muted: var(--gray-500);
   
   /* Background */
@@ -237,8 +238,10 @@ body {
   font-size: 1.125rem;
   line-height: 1.8;
   min-height: 150px;
+  max-height: 200px;
   position: relative;
   overflow: hidden;
+  word-wrap: break-word;
 }
 
 .text-display-area::before {

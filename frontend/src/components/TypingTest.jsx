@@ -117,30 +117,69 @@ const TypingTest = () => {
   };
 
   const renderText = () => {
-    return text.split('').map((char, index) => {
-      const status = getCharacterStatus(char, userInput[index], index, userInput.length);
-      
-      let className = 'text-lg';
-      switch (status) {
-        case 'correct':
-          className += ' text-correct';
-          break;
-        case 'incorrect':
-          className += ' text-incorrect';
-          break;
-        case 'current':
-          className += ' text-current';
-          break;
-        default:
-          className += ' text-untyped';
-      }
-      
-      return (
-        <span key={index} className={className}>
-          {char}
-        </span>
-      );
-    });
+    const VISIBLE_CHARS_AHEAD = 120; // Number of characters to show ahead of current position
+    const currentPosition = userInput.length;
+    const startPosition = Math.max(0, currentPosition - 30); // Show 30 chars behind current position
+    const endPosition = Math.min(text.length, currentPosition + VISIBLE_CHARS_AHEAD);
+    
+    const visibleText = text.slice(startPosition, endPosition);
+    
+    return (
+      <div style={{ position: 'relative', minHeight: '120px' }}>
+        {/* Progress indicator */}
+        <div style={{
+          position: 'absolute',
+          top: '-30px',
+          right: '0',
+          fontSize: '0.875rem',
+          color: 'var(--text-secondary)',
+          background: 'var(--bg-secondary)',
+          padding: '4px 8px',
+          borderRadius: '4px'
+        }}>
+          {currentPosition} / {text.length} characters
+        </div>
+        
+        {visibleText.split('').map((char, index) => {
+          const actualIndex = startPosition + index;
+          const status = getCharacterStatus(char, userInput[actualIndex], actualIndex, userInput.length);
+          
+          let className = 'text-lg';
+          switch (status) {
+            case 'correct':
+              className += ' text-correct';
+              break;
+            case 'incorrect':
+              className += ' text-incorrect';
+              break;
+            case 'current':
+              className += ' text-current';
+              break;
+            default:
+              className += ' text-untyped';
+          }
+          
+          return (
+            <span key={actualIndex} className={className}>
+              {char}
+            </span>
+          );
+        })}
+        
+        {/* Fade indicator to show there's more text */}
+        {endPosition < text.length && (
+          <span style={{
+            color: 'var(--text-tertiary)',
+            fontSize: '0.875rem',
+            fontStyle: 'italic',
+            marginLeft: '8px',
+            opacity: '0.6'
+          }}>
+            ...
+          </span>
+        )}
+      </div>
+    );
   };
 
   if (loading) {

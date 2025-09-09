@@ -10,9 +10,9 @@ function AppContent() {
 
   useEffect(() => {
     if (user && user.highestWPM > 0) {
-      document.title = `TypeRush - Best: ${user.highestWPM} WPM`;
+      document.title = `TypeRush`;
     } else {
-      document.title = 'TypeRush - Typing Speed Test';
+      document.title = 'TypeRush';
     }
   }, [user]);
 
